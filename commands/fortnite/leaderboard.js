@@ -14,9 +14,39 @@ let fortniteAPI = new Fortnite(
     }
 );
 exports.run = (client, msg, args) => {
+    //Check for Valid 
+    if(args[3] != null){ 
+        if(args[3] != "pc" || args[3] != "ps4" || args[3] != "xb1"){ 
+            msg.reply("Please make sure to pass in either the proper platform.") 
+            return 
+        } 
+    } 
+ 
+    //Find Platform 
+    var plat = (args[3] == null ? "pc" : args[3]) 
+ 
+    //Find Match Type 
+    var matchType = null; 
+    switch(args[2]) { 
+        case "solo": 
+            console.log("s: " + args[2]) 
+            matchType = Fortnite.SOLO; 
+            break; 
+        case "duo": 
+            console.log("d: " + args[2]) 
+            matchType = Fortnite.DUO; 
+            break; 
+        case "squad": 
+            console.log("sq: " + args[2]) 
+            matchType = Fortnite.SQUAD; 
+            break; 
+        default: 
+            matchType = Fortnite.SOLO; 
+    } 
+
     fortniteAPI.login().then(() => {
         fortniteAPI
-            .getScoreLeaderBoard("pc", Fortnite.SOLO)
+            .getScoreLeaderBoard(plat, matchType)
             .then(leaderboard => {
                 
                 var leaderboardDisplay = "__**Leaderboard**__\n```";
