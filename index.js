@@ -23,7 +23,10 @@ client.on('message', msg => {
             if(args[0].substring(2) == "ftn")
                 commandFile = require(`./commands/fortnite/${args[1]}.js`);
             else if(args[0].substring(2) == "lol"){
-                
+                if(args[1] != "status"){
+                    noPrefix = msg.content.substring(5)
+                    commandFile = require(`./commands/league/${args[1]}.js`);
+                }
                 commandFile = require(`./commands/league/${args[1]}.js`);
             }
             commandFile.run(client, msg, args);
