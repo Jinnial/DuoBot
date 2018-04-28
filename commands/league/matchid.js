@@ -18,8 +18,8 @@ exports.run = (client, msg, args) => {
                 for(var i = 0; i < 10; i++){
                 sumPrint += "Lane: " + body.lane + "\n Champion Played: " + body.name + "\n Server: " + body.platformId + "\n Role: " + body.role + "```"
                 }
+                msg.channel.send(sumPrint);
             }
         }
-        msg.channel.send(sumPrint);
     });
 }
