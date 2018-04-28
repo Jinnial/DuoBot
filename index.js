@@ -43,11 +43,12 @@ client.on('message', msg => {
                     });
                     console.log(newArgs)
                     args = restArgs;
-                    commandFile = require(`./commands/league/${newArgs[1]}.js`);
+                    commandFile = require(`./commands/league/${newArgs}.js`);
+                } else{
+                    commandFile = require(`./commands/league/${args}.js`);
                 }
-                console.log(args[1])
+                //console.log(args[1])
             }
-            commandFile.run(client, msg, newArgs);
         } catch (err) {
             console.error(err);
         }
