@@ -22,10 +22,12 @@ client.on('message', msg => {
             var commandFile = ""
             if(args[0].substring(2) == "ftn"){
                 commandFile = require(`./commands/fortnite/${args[1]}.js`);
+                console.log("FILE: " + args[1])
                 commandFile.run(client, msg, args);
             }
-            else if(args[0].substring(2) == "lol"){
+            if(args[0].substring(2) == "lol"){
                 if(args[1] != "status"){
+                    
                     //Get Summoner Name
                     let noPrefix = msg.content.substring(5)
                     let startPos = noPrefix.indexOf('"') + 1;
@@ -38,9 +40,12 @@ client.on('message', msg => {
                     restArgs.forEach(item => {
                         newArgs.push(item)
                     });
-                    console.log("FILE: " + newArgs[1])
-                    args = restArgs;
+
+                    //Open File
+                    console.log("ORG:" + args)
+                    console.log("NEW: " + newArgs)
                     commandFile = require(`./commands/league/${newArgs[1]}.js`);
+                    commandFile.run(client, msg, newArgs);
                 } else{
                     console.log("I'm Weird")
                     commandFile = require(`./commands/league/${args[1]}.js`);
