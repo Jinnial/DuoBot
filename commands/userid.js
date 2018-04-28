@@ -1,3 +1,5 @@
+const dotenv = require('dotenv').config();
+
 //Fortnite API
 const Fortnite = require("fortnite-api");
 let fortniteAPI = new Fortnite(
@@ -20,7 +22,7 @@ exports.run = (client, msg, args) => {
             .getStatsBR(args[2], "pc")
             .then(stats => {
                 console.log('Pass')
-                msg.reply("The account ID is: " + stats.info.accountId);
+                msg.reply("```The account ID is: " + stats.info.accountId + "\nCalled by: " + process.env.DEVNAME + "```");
             })
             .catch(err => {
                 console.log('Fail')

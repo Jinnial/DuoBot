@@ -16,7 +16,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     console.log(msg.content.substring(0, 2))
     if (msg.content.substring(0, 2) == process.env.PREFIX) {
-        const args = msg.content.split(" ");
+        const args = msg.content.toLocaleLowerCase().split(" ");
         console.log(args[1]);
         try {
             let commandFile = require(`./commands/${args[1]}.js`);
