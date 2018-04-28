@@ -32,22 +32,19 @@ client.on('message', msg => {
                     let endPos = noPrefix.indexOf('"', startPos);
                     var name = noPrefix.substring(startPos,endPos)
 
-                    //Print Data to Console
-                    console.log(noPrefix, startPos, endPos, name)
-
                     //Rebuild Args
                     newArgs = [args[0], args[1], name]
                     var restArgs = noPrefix.substring(endPos + 1).split(" ")
                     restArgs.forEach(item => {
                         newArgs.push(item)
                     });
-                    console.log(newArgs)
+                    console.log("FILE: " + newArgs[1])
                     args = restArgs;
-                    commandFile = require(`./commands/league/${newArgs}.js`);
+                    commandFile = require(`./commands/league/${newArgs[1]}.js`);
                 } else{
-                    commandFile = require(`./commands/league/${args}.js`);
+                    console.log("I'm Weird")
+                    commandFile = require(`./commands/league/${args[1]}.js`);
                 }
-                //console.log(args[1])
             }
         } catch (err) {
             console.error(err);
