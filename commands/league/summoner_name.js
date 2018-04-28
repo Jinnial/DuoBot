@@ -20,5 +20,6 @@ exports.run = (client, msg, args) => {
         "```Summoner Name: " + body.name +
         "\nSummoner ID: " + body.id +
         "\nSummoner Level: " + body.summonerLevel + "```");
+        msg.channel.send(sumPrint);
     });
 }
