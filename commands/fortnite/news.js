@@ -22,11 +22,11 @@ exports.run = (client, msg, args) => {
             .getFortniteNews("en")
             .then(news => {
                 console.log('Pass')
-                var out = ""
+                var out = "```Current Fortnite News```\n"
                 news.br.forEach(article => {
-                    out+= "__**" + article.title + "**__\n" + article.body + "\n";
+                    out+= "__**" + article.title + "**__\n" + article.body + "\n\n";
                 });
-                msg.channel.send(out + "\n```Called by: " + process.env.DEVNAME + "```")
+                msg.channel.send(out)
             })
             .catch(err => {
                 console.log('Fail')
