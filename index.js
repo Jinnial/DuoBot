@@ -21,8 +21,8 @@ client.on('message', msg => {
         try {
             var commandFile = ""
             if(args[0].substring(2) == "ftn"){
-                commandFile = require(`./commands/fortnite/${args[1]}.js`);
                 console.log("FILE: " + args[1])
+                commandFile = require(`./commands/fortnite/${args[1]}.js`);
                 commandFile.run(client, msg, args);
             }
             if(args[0].substring(2) == "lol"){
