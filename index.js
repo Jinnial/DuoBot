@@ -47,7 +47,7 @@ client.on('message', msg => {
                     commandFile = require(`./commands/league/${newArgs[1]}.js`);
                     commandFile.run(client, msg, newArgs);
                 } else{
-                    console.log("I'm Weird")
+                   // console.log("I'm Weird")
                     commandFile = require(`./commands/league/${args[1]}.js`);
                 }
             }
