@@ -14,12 +14,16 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    console.log(msg.content.substring(0, 2))
+    console.log(msg.content.substring(0, 5))
     if (msg.content.substring(0, 2) == process.env.PREFIX) {
         const args = msg.content.toLocaleLowerCase().split(" ");
-        console.log(args[1]);
+        console.log("Argumants: " + args);
         try {
-            let commandFile = require(`./commands/${args[1]}.js`);
+            let commandFile = ""
+            if(args[0].substring(2) == "ftn")
+                commandFile = require(`./commands/fortnite/${args[1]}.js`);
+            else if(args[0].substring(2) == "lol")
+                commandFile = require(`./commands/league/${args[1]}.js`);
             commandFile.run(client, msg, args);
         } catch (err) {
             console.error(err);
