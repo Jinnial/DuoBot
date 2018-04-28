@@ -16,6 +16,10 @@ exports.run = (client, msg, args) => {
     //Grab User ID
     request(`https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${args[2]}?api_key=${process.env.LEAGUE}`, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
-        msg.reply(body.id);
+        var sumPrint = ("__**Summoner Info**__\n"+
+        "```Summoner Name: " + body.name +
+        "\nSummoner ID: " + body.id +
+        "\nSummoner Level: " + body.summonerLevel + "```");
+        msg.channel.send(sumPrint);
     });
 }
