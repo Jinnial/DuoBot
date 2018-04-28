@@ -16,20 +16,38 @@ client.on('ready', () => {
 client.on('message', msg => {
     console.log(msg.content.substring(0, 5))
     if (msg.content.substring(0, 2) == process.env.PREFIX) {
-        const args = msg.content.toLocaleLowerCase().split(" ");
-        console.log("Argumants: " + args);
+        var args = msg.content.toLocaleLowerCase().split(" ");
+        var newArgs = []
         try {
-            let commandFile = ""
-            if(args[0].substring(2) == "ftn")
+            var commandFile = ""
+            if(args[0].substring(2) == "ftn"){
                 commandFile = require(`./commands/fortnite/${args[1]}.js`);
+                commandFile.run(client, msg, args);
+            }
             else if(args[0].substring(2) == "lol"){
                 if(args[1] != "status"){
-                    noPrefix = msg.content.substring(5)
-                    commandFile = require(`./commands/league/${args[1]}.js`);
+                    //Get Summoner Name
+                    let noPrefix = msg.content.substring(5)
+                    let startPos = noPrefix.indexOf('"') + 1;
+                    let endPos = noPrefix.indexOf('"', startPos);
+                    var name = noPrefix.substring(startPos,endPos)
+
+                    //Print Data to Console
+                    console.log(noPrefix, startPos, endPos, name)
+
+                    //Rebuild Args
+                    newArgs = [args[0], args[1], name]
+                    var restArgs = noPrefix.substring(endPos + 1).split(" ")
+                    restArgs.forEach(item => {
+                        newArgs.push(item)
+                    });
+                    console.log(newArgs)
+                    args = restArgs;
+                    commandFile = require(`./commands/league/${newArgs[1]}.js`);
                 }
-                commandFile = require(`./commands/league/${args[1]}.js`);
+                console.log(args[1])
             }
-            commandFile.run(client, msg, args);
+            commandFile.run(client, msg, newArgs);
         } catch (err) {
             console.error(err);
         }
